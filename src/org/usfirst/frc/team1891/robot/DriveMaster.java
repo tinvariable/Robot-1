@@ -6,10 +6,14 @@ import edu.wpi.first.wpilibj.Joystick;
 public class DriveMaster
 {
 	Joystick joyRight;
-	final double DEADZONE=0.05;
+	public final double DEADZONE=0.2;
 	public DriveMaster(int joyPort)
 	{
 		joyRight= new Joystick(joyPort);
+	}
+	public double getDEADZONE()
+	{
+		return DEADZONE;
 	}
 	public double getYAxis()
 	{
@@ -25,7 +29,7 @@ public class DriveMaster
 	}
 	public double getXAxis()
 	{
-		double value = joyRight.getY();
+		double value = joyRight.getX();
 		if(Math.abs(value) > DEADZONE)
 		{
 			return value;
@@ -37,7 +41,7 @@ public class DriveMaster
 	}
 	public double getZAxis()
 	{
-		double value = joyRight.getY();
+		double value = joyRight.getZ();
 		if(Math.abs(value) > DEADZONE)
 		{
 			return value;
@@ -47,4 +51,5 @@ public class DriveMaster
 			return 0;
 		}
 	}	
+
 }
