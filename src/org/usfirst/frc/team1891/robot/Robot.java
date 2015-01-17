@@ -13,139 +13,120 @@ import org.omg.CORBA.portable.UnknownException;
 import org.usfirst.frc.team1891.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1891.robot.subsystems.ExampleSubsystem;
 
-public class Robot extends IterativeRobot
-{
+public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	//Brings in DriveMaster
-	DriveMaster roboDrive;
 	Command autonomousCommand;
 	//Instantiates jags with appropriate ID's
     CANJaguar jag3;
     CANJaguar jag4;
     CANJaguar jag5;
     CANJaguar jag6;
+    JAGValue getSpeed;
 	//Initiates all instances of all classes
+    int moveTest=0;
     public void robotInit()
     {
-		oi = new OI();
+    	getSpeed = new JAGValue();
+    	oi = new OI();
 		jag3 = new CANJaguar(3);
 		jag4 = new CANJaguar(4);
 		jag5 = new CANJaguar(5);
 		jag6 = new CANJaguar(6);
-		roboDrive = new DriveMaster(1);
     }
 	
-	public void disabledPeriodic() 
-	{
+	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-    public void autonomousInit()
-    {
+    public void autonomousInit() {
 
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
-    public void autonomousPeriodic()
-    {
+    public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        
-        
-        
     }
 
-    public void teleopInit() 
-    {
+    public void teleopInit() {
     	
-        if (autonomousCommand != null) 
-        {
+        if (autonomousCommand != null){
         	autonomousCommand.cancel();
         }
         
      }   	
         	
-    public void disabledInit()
+    public void disabledInit() 
     {
 
     }
 
-    public void teleopPeriodic()
+    public void teleopPeriodic() 
     {	
 		Scheduler.getInstance().run();
+<<<<<<< HEAD
+		jag3.set(getSpeed.setSpeed(3));
+		jag4.set(getSpeed.setSpeed(4));
+		jag5.set(getSpeed.setSpeed(5));
+		jag6.set(getSpeed.setSpeed(6));
+=======
 		//sets Y axis to move robot forwards and backwards
-		if(roboDrive.getZAxis()<roboDrive.getDEADZONE())
+		moveTest=0;
+		if(moveTest==0)
 		{
-			if(roboDrive.getZAxis()>-(roboDrive.getDEADZONE()))
+			if(roboDrive.testYAxis())
 			{
-				if(roboDrive.getXAxis()<roboDrive.getDEADZONE())
-				{
-					if(roboDrive.getXAxis()>-(roboDrive.getDEADZONE()))
-					{
-						jag3.set(roboDrive.getYAxis());
-						jag4.set(-(roboDrive.getYAxis()));
-						jag5.set(-(roboDrive.getYAxis()));
-						jag6.set(roboDrive.getYAxis());
-					}
-				}
+				jag3.set(roboDrive.getYAxis());
+				jag4.set(-(roboDrive.getYAxis()));
+				jag5.set(-(roboDrive.getYAxis()));
+				jag6.set(roboDrive.getYAxis());
+				moveTest++;
 			}
 		}
-		//sets z axis to turn the robot left and right
-		else if(roboDrive.getYAxis()<roboDrive.getDEADZONE())
+		if(moveTest==0)
 		{
-			if(roboDrive.getYAxis()>-(roboDrive.getDEADZONE()))
+			if(roboDrive.testZAxis())
 			{
-				if(roboDrive.getXAxis()<roboDrive.getDEADZONE() )
-				{
-					if(roboDrive.getXAxis()>-(roboDrive.getDEADZONE()))
-					{
-						jag3.set(roboDrive.getZAxis());
-						jag4.set(roboDrive.getZAxis());
-						jag5.set(roboDrive.getZAxis());
-						jag6.set(roboDrive.getZAxis());
-					}
-
-				}
+				jag3.set(roboDrive.getZAxis());
+				jag4.set(roboDrive.getZAxis());
+				jag5.set(roboDrive.getZAxis());
+				jag6.set(roboDrive.getZAxis());
+				moveTest++;
 			}
 		}
-		//turns the robot left and right horizontally with the x axis
-		else if(roboDrive.getYAxis()<roboDrive.getDEADZONE())
+		if(moveTest==0)
 		{
-			if(roboDrive.getYAxis()>-(roboDrive.getDEADZONE()))
+			if(roboDrive.testXAxisPos())
 			{
-				if(roboDrive.getXAxis()<roboDrive.getDEADZONE())
-				{
-					if(roboDrive.getZAxis()>-(roboDrive.getDEADZONE()))
-					{
-						//Move right
-						if (roboDrive.getXAxis()>0)
-						{
-							jag3.set(roboDrive.getXAxis());
-							jag4.set(-(roboDrive.getXAxis()));
-							jag5.set(roboDrive.getXAxis());
-							jag6.set(-(roboDrive.getXAxis()));
-						}
-						//Move left
-						if(roboDrive.getXAxis()<0)
-						{
-							jag3.set(roboDrive.getXAxis());
-							jag4.set(-(roboDrive.getXAxis()));
-							jag5.set(roboDrive.getXAxis());
-							jag6.set(-(roboDrive.getXAxis()));
-						}
-					}
-				}
+				//Move right
+				jag3.set(roboDrive.getXAxis());
+				jag4.set(-(roboDrive.getXAxis()));
+				jag5.set(roboDrive.getXAxis());
+				jag6.set(-(roboDrive.getXAxis()));
+				moveTest++;
 			}
 		}
+		if(moveTest==0)
+		{
+			if(roboDrive.testXAxisNeg())
+			{
+				//Move right
+				jag3.set(roboDrive.getXAxis());
+				jag4.set(-(roboDrive.getXAxis()));
+				jag5.set(roboDrive.getXAxis());
+				jag6.set(-(roboDrive.getXAxis()));
+				moveTest++;
 		
-		
+			}
+		}
 				
+>>>>>>> origin/master
     }
-    
 
-    public void testPeriodic()
-    {
+
+    public void testPeriodic() {
         LiveWindow.run();
     }
 }

@@ -8,7 +8,7 @@ public class DriveMaster
 	//Instantiates joystick
 	Joystick joyRight;
 	// sets DEADZONE around all axis
-	public final double DEADZONE=0.2;
+	public final double DEADZONE=0.3;
 	//constructor for DriveMaster
 	public DriveMaster(int joyPort)
 	{
@@ -20,44 +20,83 @@ public class DriveMaster
 		return DEADZONE;
 	}
 	//gets the modified y axis from the joystick that tests against deadzone
+	
 	public double getYAxis()
 	{
-		double value = joyRight.getY();
-		if(Math.abs(value) > DEADZONE)
-		{
-			return value;
-		}
-		else
-		{
-			return 0;
-		}
+		return getDead(joyRight.getY());
+			
 	}
 	//gets the modified x axis from the joystick that tests against deadzone
 	public double getXAxis()
 	{
-		double value = joyRight.getX();
-		if(Math.abs(value) > DEADZONE)
-		{
-			return value;
-		}
-		else
-		{
-			return 0;
-		}
+		return getDead(-joyRight.getX());
+		
 	}
 	//gets the modified z axis from the joystick that tests against deadzone
 	public double getZAxis()
 	{
-		double value = joyRight.getZ();
+		return getDead(-joyRight.getZ());
+		
+	}
+
+	public double getDead(double a) 
+	{
+		
+		if(Math.abs(a) > DEADZONE) 
+		{
+			return a;
+		}
+<<<<<<< HEAD
+		return 0;
+=======
+	}	
+	public boolean testYAxis()
+	{
+		double value = joyRight.getY();
 		if(Math.abs(value) > DEADZONE)
 		{
-			return value;
+			return true;
 		}
 		else
 		{
-			return 0;
+			return false;
 		}
-	}	
-
+	}
+	public boolean testZAxis()
+	{
+		double value = joyRight.getZ();
+		if(Math.abs(value) > DEADZONE)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	public boolean testXAxisPos()
+	{
+		double value = joyRight.getX();
+		if(value > DEADZONE)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}public boolean testXAxisNeg()
+	{
+		double value = joyRight.getX();
+		if(value > -(DEADZONE))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+>>>>>>> origin/master
+	}
 
 }
