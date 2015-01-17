@@ -5,16 +5,21 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class DriveMaster
 {
+	//Instantiates joystick
 	Joystick joyRight;
+	// sets DEADZONE around all axis
 	public final double DEADZONE=0.2;
+	//constructor for DriveMaster
 	public DriveMaster(int joyPort)
 	{
 		joyRight= new Joystick(joyPort);
 	}
+	//returns DEADZONE
 	public double getDEADZONE()
 	{
 		return DEADZONE;
 	}
+	//gets the modified y axis from the joystick that tests against deadzone
 	public double getYAxis()
 	{
 		double value = joyRight.getY();
@@ -27,6 +32,7 @@ public class DriveMaster
 			return 0;
 		}
 	}
+	//gets the modified x axis from the joystick that tests against deadzone
 	public double getXAxis()
 	{
 		double value = joyRight.getX();
@@ -39,6 +45,7 @@ public class DriveMaster
 			return 0;
 		}
 	}
+	//gets the modified z axis from the joystick that tests against deadzone
 	public double getZAxis()
 	{
 		double value = joyRight.getZ();
@@ -51,5 +58,6 @@ public class DriveMaster
 			return 0;
 		}
 	}	
+
 
 }
