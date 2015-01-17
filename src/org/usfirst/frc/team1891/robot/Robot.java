@@ -110,26 +110,34 @@ public class Robot extends IterativeRobot
 			}
 		}
 		//turns the robot left and right horizontally with the x axis
-		/*else if(roboDrive.getYAxis()<roboDrive.getDEADZONE() &&roboDrive.getYAxis()>-(roboDrive.getDEADZONE()) &&
-				roboDrive.getXAxis()<roboDrive.getDEADZONE() && roboDrive.getZAxis()>-(roboDrive.getDEADZONE()))
+		else if(roboDrive.getYAxis()<roboDrive.getDEADZONE())
 		{
-			//Move right
-			if (roboDrive.getXAxis()>0)
+			if(roboDrive.getYAxis()>-(roboDrive.getDEADZONE()))
 			{
-				jag3.set(roboDrive.getXAxis());
-				jag4.set(-(roboDrive.getXAxis()));
-				jag5.set(roboDrive.getXAxis());
-				jag6.set(-(roboDrive.getXAxis()));
+				if(roboDrive.getXAxis()<roboDrive.getDEADZONE())
+				{
+					if(roboDrive.getZAxis()>-(roboDrive.getDEADZONE()))
+					{
+						//Move right
+						if (roboDrive.getXAxis()>0)
+						{
+							jag3.set(roboDrive.getXAxis());
+							jag4.set(-(roboDrive.getXAxis()));
+							jag5.set(roboDrive.getXAxis());
+							jag6.set(-(roboDrive.getXAxis()));
+						}
+						//Move left
+						if(roboDrive.getXAxis()<0)
+						{
+							jag3.set(roboDrive.getXAxis());
+							jag4.set(-(roboDrive.getXAxis()));
+							jag5.set(roboDrive.getXAxis());
+							jag6.set(-(roboDrive.getXAxis()));
+						}
+					}
+				}
 			}
-			//Move left
-			if(roboDrive.getXAxis()<0)
-			{
-				jag3.set(roboDrive.getXAxis());
-				jag4.set(-(roboDrive.getXAxis()));
-				jag5.set(roboDrive.getXAxis());
-				jag6.set(-(roboDrive.getXAxis()));
-			}
-		}*/
+		}
 		
 		
 				
